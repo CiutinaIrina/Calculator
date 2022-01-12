@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 let operations = ["+", "-", "*", "/"];
 let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-let numbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
 
 
 function inArray(element, array) {
@@ -26,9 +26,7 @@ function inf(char) {
   }
 }
 
-function s(number) {
-  return number.toString();
-}
+
 function n(string) {
   return Number(string);
 } 
@@ -61,16 +59,16 @@ class App extends Component {
   typing(symbol) {
     this.setState({ characters: this.state.characters + symbol })
     if (inArray(symbol, numbers)) {
-      if (this.state.number == 0) {
-        this.state.previous = symbol;
+      if (this.state.number === 0) {
+        this.setState({ previous:  symbol });
       }
       
       else {
-        this.state.previous = this.state.previous+ symbol;
+        this.setState({ previous: this.state.previous + symbol });
       }
     }
     else{
-      this.state.previous = 0;
+      this.setState({ previous: 0 });
     }
     this.setState({ number: this.state.previous });
   }
@@ -96,7 +94,7 @@ class App extends Component {
       let array = [...this.state.characters];
       array.pop();
       let string;
-      if (array.length == 0) {
+      if (array.length === 0) {
         string = "";
       } else {
         string = this.stringify(array);
@@ -202,34 +200,34 @@ class App extends Component {
         if (array[i] === "Infinity" && result === "Infinity") {
           result = "Infinity"
         }//cazul infinit si infinit
-        else if (array[i] == "Infinity" && result != "Infinity" && result != "-Infinity") {
+        else if (array[i] === "Infinity" && result !== "Infinity" && result !== "-Infinity") {
           
           result = "Infinity"
         }//cazul infinit si a
-        else if (array[i] != "Infinity" && array[i] != "-Infinity" && result == "Infinity") {
+        else if (array[i] !== "Infinity" && array[i] !== "-Infinity" && result === "Infinity") {
           result = "Infinity"
         }//cazul a si infinit
-        else if (array[i] == "-Infinity" && result == "-Infinity") {
+        else if (array[i] === "-Infinity" && result === "-Infinity") {
           result = "Error";
           break;
         }//cazul -infinit si -infinit
-        else if (array[i] == "-Infinity" && result != "Infinity" && result != "-Infinity") {
+        else if (array[i] === "-Infinity" && result !== "Infinity" && result !== "-Infinity") {
           result = "-Infinity"
           //alert(1)
         }//cazul -infinit si a
-        else if (array[i] != "Infinity" && result == "-Infinity") {
+        else if (array[i] !== "Infinity" && result === "-Infinity") {
           result = "-Infinity"
           //alert(2)
         }//cazul a si -infinit
-        else if (array[i] == "-Infinity" && result == "Infinity") {
+        else if (array[i] === "-Infinity" && result === "Infinity") {
           result = "Error";
           break;
         }//cazul -infinit si infinit
-        else if (array[i] == "Infinity" && result == "-Infinity") {
+        else if (array[i] === "Infinity" && result === "-Infinity") {
           result = "Error";
           break;
         }//cazul infinit si -infinit
-        else if(result != "Infinity" && result != "-Infinity" && array[i] != "Infinity" && array[i] != "-Infinity"){
+        else if(result !== "Infinity" && result !== "-Infinity" && array[i] !== "Infinity" && array[i] !== "-Infinity"){
           result += array[i];
         }
       }
